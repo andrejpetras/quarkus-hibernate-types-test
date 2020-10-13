@@ -1,14 +1,16 @@
 package com.github.andrejpetras.quarkus.hibernate.types;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.RoutingContext;
+import io.quarkus.vertx.web.Route;
 
-@Path("/ping")
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class PingRestController {
 
-    @GET
-    public Response ping() {
-        return Response.ok("PONG").build();
+    @Route(methods = HttpMethod.GET)
+    public void ping(RoutingContext rc) {
+        rc.response().end("PONG");
     }
 }
